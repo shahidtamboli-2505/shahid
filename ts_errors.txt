@@ -1,0 +1,23 @@
+src/components/MagneticButton.tsx(1,28): error TS1484: 'ReactNode' is a type and must be imported using a type-only import when 'verbatimModuleSyntax' is enabled.
+src/components/MagneticButton.tsx(43,6): error TS2322: Type '{ children: Element; asChild?: boolean | undefined; disabled?: boolean | undefined; form?: string | undefined; formAction?: string | ((formData: FormData) => void | Promise<...>) | undefined; ... 286 more ...; className: string; }' is not assignable to type 'Omit<HTMLMotionProps<"button">, "ref">'.
+  Types of property 'onAnimationStart' are incompatible.
+    Type 'AnimationEventHandler<HTMLButtonElement> | undefined' is not assignable to type '((definition: AnimationDefinition) => void) | undefined'.
+      Type 'AnimationEventHandler<HTMLButtonElement>' is not assignable to type '(definition: AnimationDefinition) => void'.
+        Types of parameters 'event' and 'definition' are incompatible.
+          Type 'AnimationDefinition' is not assignable to type 'AnimationEvent<HTMLButtonElement>'.
+            Type 'string' is not assignable to type 'AnimationEvent<HTMLButtonElement>'.
+src/components/sections/AboutSection.tsx(2,40): error TS6133: 'useTransform' is declared but its value is never read.
+src/components/sections/ContactSection.tsx(3,37): error TS2305: Module '"lucide-react"' has no exported member 'Github'.
+src/components/sections/ContactSection.tsx(3,45): error TS2305: Module '"lucide-react"' has no exported member 'Linkedin'.
+src/components/sections/ContactSection.tsx(3,55): error TS2305: Module '"lucide-react"' has no exported member 'Instagram'.
+src/components/sections/Footer.tsx(1,10): error TS2305: Module '"lucide-react"' has no exported member 'Github'.
+src/components/sections/Footer.tsx(1,18): error TS2305: Module '"lucide-react"' has no exported member 'Linkedin'.
+src/components/sections/Footer.tsx(1,28): error TS2305: Module '"lucide-react"' has no exported member 'Instagram'.
+src/components/sections/HeroSection.tsx(3,10): error TS2305: Module '"lucide-react"' has no exported member 'Github'.
+src/components/sections/HeroSection.tsx(3,18): error TS2305: Module '"lucide-react"' has no exported member 'Linkedin'.
+src/components/sections/HeroSection.tsx(3,34): error TS2305: Module '"lucide-react"' has no exported member 'Instagram'.
+src/components/sections/ProjectsSection.tsx(1,18): error TS1484: 'MouseEvent' is a type and must be imported using a type-only import when 'verbatimModuleSyntax' is enabled.
+src/components/sections/ProjectsSection.tsx(3,24): error TS2305: Module '"lucide-react"' has no exported member 'Github'.
+src/components/sections/ProjectsSection.tsx(4,1): error TS6133: 'MagneticButton' is declared but its value is never read.
+src/components/sections/ProjectsSection.tsx(140,9): error TS6133: 'isInView' is declared but its value is never read.
+src/utils/cn.ts(1,10): error TS1484: 'ClassValue' is a type and must be imported using a type-only import when 'verbatimModuleSyntax' is enabled.
