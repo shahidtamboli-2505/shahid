@@ -37,7 +37,7 @@ export const AboutSection = () => {
 
   const stats = [
     { value: 5, suffix: "+", label: "Projects Shipped" },
-    { value: 2, suffix: "", label: "Paying Clients" },
+    { value: 4, suffix: "", label: "Paying Clients" },
     { value: 60, suffix: "%", label: "Faster Order Processing" },
     { value: 35, suffix: "%", label: "Fewer Runway Conflicts" },
   ];
