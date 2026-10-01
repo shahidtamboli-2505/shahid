@@ -1,9 +1,26 @@
 import { useRef, type MouseEvent } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Briefcase } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 
-const projects = [
+interface Project {
+  title: string;
+  description: string;
+  repo: string;
+  type: string;
+  tech: string[];
+  isInternship?: boolean;
+}
+
+const projects: Project[] = [
+  {
+    title: "Full-Stack & Agentic AI Intern — Pixel11 (Startup)",
+    description: "Built scalable web-scraping pipelines (Python, BeautifulSoup, Playwright, Stealth) to extract management-level contact data; integrated LLM APIs into automation workflows; designed REST APIs powering AI-driven business processes and built backend services for intelligent data retrieval.",
+    repo: "https://github.com/shahidtamboli-2505/Shahid-Intern-project-1",
+    type: "Internship · Nov 2025 – Feb 2026",
+    tech: ["Python", "BeautifulSoup", "Playwright", "LLM APIs", "REST APIs", "Agentic AI", "Web Scraping"],
+    isInternship: true,
+  },
   {
     title: "Guts — Enterprise AI Assistant (LLM + Agentic AI)",
     description: "Built a modular voice/text assistant powered by a RAG pipeline and vector database, integrating weather, search, and time/date utilities via external APIs; architected for future LLM-based extensions.",
@@ -41,7 +58,7 @@ const projects = [
   }
 ];
 
-const TiltCard = ({ project, index }: { project: typeof projects[0], index: number }) => {
+const TiltCard = ({ project, index }: { project: Project, index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   
   const x = useMotionValue(0);
@@ -97,9 +114,17 @@ const TiltCard = ({ project, index }: { project: typeof projects[0], index: numb
         {/* Hover Glow */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_var(--mouse-x,50%)_var(--mouse-y,50%),rgba(56,189,248,0.1)_0%,transparent_100%)] pointer-events-none" />
 
+        {/* Internship Badge */}
+        {project.isInternship && (
+          <div className="absolute top-4 right-4 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-accent2/15 border border-accent2/40 text-accent2 text-xs font-semibold tracking-wide z-10">
+            <Briefcase size={11} />
+            Internship
+          </div>
+        )}
+
         <div className="w-full flex items-start justify-between mb-4">
           <div className="bg-background-light p-3 rounded-xl border border-white/10 group-hover:bg-primary/10 transition-colors">
-            <FaGithub size={24} className="text-primary" />
+            {project.isInternship ? <Briefcase size={24} className="text-accent2" /> : <FaGithub size={24} className="text-primary" />}
           </div>
           <a
             href={project.repo}
