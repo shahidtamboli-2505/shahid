@@ -2,7 +2,7 @@ import { GraduationCap, Award, Trophy, Users, BadgeCheck } from "lucide-react";
 import { Reveal, SectionHeading } from "../Reveal";
 
 const timeline = [
-  { icon: BadgeCheck, period: "Sep 2025 – Apr 2026 · Current", title: "AI/ML Research & Development Intern", org: "Computer Science development startup", note: "ML models · APIs · Research implementation · Product", accent: "text-accent1 border-accent1/40", bullets: ["Build, train and validate ML models and expose them through APIs for production use.", "Implement research for PhD clients — turning paper methodology into working, reproducible code for publication.", "Contribute to the startup's own product features alongside the research work."] },
+  { icon: BadgeCheck, period: "Sep 2025 – Apr 2026 · Current", title: "AI/ML Research & Development Intern", org: "CS Development (Startup)", note: "ML models · APIs · Research implementation · Product", accent: "text-accent1 border-accent1/40", bullets: ["Build, train and validate ML models and expose them through APIs for production use.", "Implement research for PhD clients — turning paper methodology into working, reproducible code for publication.", "Contribute to the startup's own product features alongside the research work."] },
   { icon: GraduationCap, period: "2023 – 2027", bullets: [] as string[], title: "B.Tech, Artificial Intelligence & Data Science", org: "Annasaheb Dange College of Engineering and Technology, Ashta", note: "Final year · CPI 7.57 / 10", accent: "text-primary border-primary/40" },
 ];
 
