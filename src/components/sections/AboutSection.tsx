@@ -41,7 +41,7 @@ export const AboutSection = () => (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
           <Reveal className="lg:col-span-5">
             <p className="text-lg md:text-xl text-text-muted leading-relaxed">
-              I'm a final-year B.Tech student in Artificial Intelligence & Data Science from Sangli, Maharashtra. Instead of just coursework, I've spent the last two years building for actual clients: a QR ordering & billing platform for a restaurant, a production website for a plastics manufacturer, and agentic scraping pipelines during my internship at Pixel11.
+              I'm a final-year B.Tech student in Artificial Intelligence & Data Science from Sangli, Maharashtra. Instead of just coursework, I've spent the last two years building for actual clients: a QR ordering & billing platform for a restaurant, a production website for a plastics manufacturer, and agentic scraping pipelines. Right now I'm an R&D intern at a CS development startup, where I build and train ML models, ship them behind APIs, and implement research for PhD clients' publications.
             </p>
             <p className="mt-6 text-lg text-text-muted leading-relaxed">
               My sweet spot is the full path from <span className="text-white">LLM/RAG backend</span> to a <span className="text-white">polished React frontend</span>, deployed and in users' hands.

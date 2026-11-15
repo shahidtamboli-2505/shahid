@@ -46,7 +46,7 @@ export const HeroSection = ({ onOpenResume }: HeroSectionProps) => {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent1 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-accent1" />
             </span>
-            Available for internships & freelance
+            Open to jobs, internships & freelance
             <span className="text-white/20">|</span>
             <span className="font-mono text-xs">Sangli, IN</span>
           </motion.div>

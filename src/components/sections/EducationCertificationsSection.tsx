@@ -2,8 +2,8 @@ import { GraduationCap, Award, Trophy, Users, BadgeCheck } from "lucide-react";
 import { Reveal, SectionHeading } from "../Reveal";
 
 const timeline = [
-  { icon: GraduationCap, period: "2023 – 2027", title: "B.Tech, Artificial Intelligence & Data Science", org: "Annasaheb Dange College of Engineering and Technology, Ashta", note: "Final year · CPI 7.57 / 10", accent: "text-primary border-primary/40" },
-  { icon: BadgeCheck, period: "2025 – 2026", title: "Full-Stack & Agentic AI Intern", org: "Pixel11 (Startup)", note: "Scraping pipelines, LLM automation, REST APIs", accent: "text-accent1 border-accent1/40" },
+  { icon: BadgeCheck, period: "Sep 2025 – Apr 2026 · Current", title: "AI/ML Research & Development Intern", org: "Computer Science development startup", note: "ML models · APIs · Research implementation · Product", accent: "text-accent1 border-accent1/40", bullets: ["Build, train and validate ML models and expose them through APIs for production use.", "Implement research for PhD clients — turning paper methodology into working, reproducible code for publication.", "Contribute to the startup's own product features alongside the research work."] },
+  { icon: GraduationCap, period: "2023 – 2027", bullets: [] as string[], title: "B.Tech, Artificial Intelligence & Data Science", org: "Annasaheb Dange College of Engineering and Technology, Ashta", note: "Final year · CPI 7.57 / 10", accent: "text-primary border-primary/40" },
 ];
 
 const certs = [
@@ -18,7 +18,7 @@ export const EducationCertificationsSection = () => (
   <section id="education" className="py-24 md:py-36 relative">
     <div className="container mx-auto px-6">
       <div className="max-w-6xl mx-auto">
-        <SectionHeading label="Background" title={<>Education & <span className="text-gradient">achievements.</span></>} />
+        <SectionHeading label="Background" title={<>Experience, education & <span className="text-gradient">achievements.</span></>} />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-5 relative">
@@ -33,6 +33,15 @@ export const EducationCertificationsSection = () => (
                   <h4 className="text-xl font-display font-semibold text-white mt-1">{t.title}</h4>
                   <p className="text-text-muted mt-1">{t.org}</p>
                   <span className="inline-block mt-3 chip">{t.note}</span>
+                  {t.bullets.length > 0 && (
+                    <ul className="mt-4 space-y-2">
+                      {t.bullets.map((b) => (
+                        <li key={b} className="flex gap-3 text-sm text-text-muted leading-relaxed">
+                          <span className="mt-2 w-1 h-1 rounded-full bg-primary shrink-0" />{b}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </Reveal>
               ))}
             </div>

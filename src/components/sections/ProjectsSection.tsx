@@ -19,13 +19,12 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: "Pixel11 — Full-Stack & Agentic AI Intern",
-    description: "Built scalable web-scraping pipelines (Python, BeautifulSoup, Playwright, Stealth) to extract management-level contact data; integrated LLM APIs into automation workflows; designed REST APIs powering AI-driven business processes and backend services for intelligent data retrieval.",
+    title: "AI Lead Intelligence & Automation Platform",
+    description: "Scalable web-scraping pipelines (Python, BeautifulSoup, Playwright in stealth mode) that extract management-level contact data from company websites into structured APIs and dashboards. LLM APIs plugged into automation workflows, with REST APIs powering AI-driven business processes and intelligent data retrieval.",
     repo: "https://github.com/shahidtamboli-2505/Shahid-Intern-project-1",
-    type: "Internship · Startup",
-    year: "Nov 2025 – Feb 2026",
+    type: "Agentic AI · Automation",
+    year: "2025",
     tech: ["Python", "Playwright", "BeautifulSoup", "LLM APIs", "REST APIs", "Agentic AI"],
-    isInternship: true,
     featured: true,
   },
   {
