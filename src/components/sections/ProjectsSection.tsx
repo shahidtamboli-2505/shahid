@@ -19,6 +19,16 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: "AI-Powered Digital Twin for Critical Infrastructure",
+    description: "Final-year mega project and research paper (submitted for publication). A Digital Twin platform for infrastructure risk monitoring in Sangli District that fuses GIS, IoT sensor, environmental, satellite and historical data through a FastAPI backend. Crack detection (computer vision), flood-risk prediction and time-series forecasting feed a central Risk Manager for risk scoring and automated alert escalation.",
+    repo: "https://github.com/shahidtamboli-2505/DigitalTwin",
+    live: "https://digital-twin-ecru-five.vercel.app/",
+    type: "Research · Computer Vision · Digital Twin",
+    year: "2026",
+    tech: ["Python", "FastAPI", "Computer Vision", "Time-Series Forecasting", "GIS", "IoT", "SQL", "Vercel"],
+    featured: true,
+  },
+  {
     title: "AI Lead Intelligence & Automation Platform",
     description: "Scalable web-scraping pipelines (Python, BeautifulSoup, Playwright in stealth mode) that extract management-level contact data from company websites into structured APIs and dashboards. LLM APIs plugged into automation workflows, with REST APIs powering AI-driven business processes and intelligent data retrieval.",
     repo: "https://github.com/shahidtamboli-2505/Shahid-Intern-project-1",

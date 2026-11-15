@@ -16,7 +16,7 @@ const CountUp = ({ to, suffix = "" }: { to: number; suffix?: string }) => {
 };
 
 const stats = [
-  { value: 6, suffix: "+", label: "Projects shipped" },
+  { value: 7, suffix: "+", label: "Projects shipped" },
   { value: 4, suffix: "", label: "Paying clients" },
   { value: 60, suffix: "%", label: "Faster order processing" },
   { value: 35, suffix: "%", label: "Fewer runway conflicts (sim)" },
