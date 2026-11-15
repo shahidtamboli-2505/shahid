@@ -1,94 +1,62 @@
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import { GraduationCap, Award, CheckCircle2 } from "lucide-react";
+import { GraduationCap, Award, Trophy, Users, BadgeCheck } from "lucide-react";
+import { Reveal, SectionHeading } from "../Reveal";
 
-const certifications = [
-  "Anthropic — Claude & AI Certifications (5 courses: Claude 101, Claude Code, AI Fluency, and others)",
-  "NPTEL — Leadership & Team Effectiveness (Elite Certificate)",
-  "Forage Virtual Job Simulations — Walmart Global Tech (Advanced Software Engineering), Deloitte (Technology Virtual Experience), Tata (GenAI Powered Data Analytics)",
-  "Sports Coordinator, ADCET; Event Coordinator, Discovery & Neuroverse Tech Fest (300+ participants), 2025–26",
-  "Gold Medalist, Boxing (University Zonal & Inter-Zonal); National-Level Participant, All India Boxing Competition (2026)"
+const timeline = [
+  { icon: GraduationCap, period: "2023 – 2027", title: "B.Tech, Artificial Intelligence & Data Science", org: "Annasaheb Dange College of Engineering and Technology, Ashta", note: "Final year · CPI 7.57 / 10", accent: "text-primary border-primary/40" },
+  { icon: BadgeCheck, period: "2025 – 2026", title: "Full-Stack & Agentic AI Intern", org: "Pixel11 (Startup)", note: "Scraping pipelines, LLM automation, REST APIs", accent: "text-accent1 border-accent1/40" },
 ];
 
-export const EducationCertificationsSection = () => {
-  const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-15%" });
+const certs = [
+  { icon: Award, title: "Anthropic — Claude & AI certifications", text: "5 courses incl. Claude 101, Claude Code and AI Fluency" },
+  { icon: Award, title: "NPTEL — Leadership & Team Effectiveness", text: "Elite certificate" },
+  { icon: BadgeCheck, title: "Forage virtual job simulations", text: "Walmart Global Tech (Advanced SWE), Deloitte (Technology), Tata (GenAI Data Analytics)" },
+  { icon: Users, title: "Event & Sports Coordinator, ADCET", text: "Discovery & Neuroverse Tech Fest, 300+ participants (2025–26)" },
+  { icon: Trophy, title: "Gold medalist — Boxing", text: "University Zonal & Inter-Zonal; national-level participant, All India Boxing Competition (2026)" },
+];
 
-  return (
-    <section id="education" className="py-24 relative" ref={sectionRef}>
-      <div className="container mx-auto px-6">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-          
-          {/* Education Side */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="mb-10 flex items-center gap-4">
-              <div className="w-12 h-12 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-primary">
-                <GraduationCap size={24} />
-              </div>
-              <h3 className="text-3xl md:text-4xl font-display font-bold text-white">Education</h3>
-            </div>
-            
-            <div className="glass-card p-8">
-              <h4 className="text-xl md:text-2xl font-display font-semibold text-white mb-2 leading-tight">
-                Annasaheb Dange College of Engineering and Technology, Ashta
-              </h4>
-              <p className="text-primary font-medium mb-6">Expected Graduation: 2027</p>
-              
-              <div className="flex flex-col gap-2 p-4 bg-white/5 rounded-xl border border-white/5">
-                <div className="text-lg font-medium text-white mb-1">
-                  B.Tech, Artificial Intelligence and Data Science
-                </div>
-                <div className="text-text-muted">
-                  4th Year
-                </div>
-                <div className="mt-2 inline-flex items-center self-start px-3 py-1 bg-accent1/10 text-accent1 border border-accent1/20 rounded-md text-sm font-semibold">
-                  CPI: 7.57 / 10
-                </div>
-              </div>
-            </div>
-          </motion.div>
+export const EducationCertificationsSection = () => (
+  <section id="education" className="py-24 md:py-36 relative">
+    <div className="container mx-auto px-6">
+      <div className="max-w-6xl mx-auto">
+        <SectionHeading label="Background" title={<>Education & <span className="text-gradient">achievements.</span></>} />
 
-          {/* Certifications Side */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="mb-10 flex items-center gap-4">
-              <div className="w-12 h-12 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-accent2">
-                <Award size={24} />
-              </div>
-              <h3 className="text-3xl md:text-4xl font-display font-bold text-white">Achievements</h3>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div className="lg:col-span-5 relative">
+            <div className="absolute left-5 top-2 bottom-2 w-px bg-gradient-to-b from-primary/60 via-white/10 to-transparent" />
+            <div className="space-y-10">
+              {timeline.map((t, i) => (
+                <Reveal key={t.title} delay={i} className="relative pl-16">
+                  <div className={`absolute left-0 top-0 w-10 h-10 rounded-full bg-background border ${t.accent} flex items-center justify-center`}>
+                    <t.icon size={18} />
+                  </div>
+                  <span className="font-mono text-xs text-text-muted">{t.period}</span>
+                  <h4 className="text-xl font-display font-semibold text-white mt-1">{t.title}</h4>
+                  <p className="text-text-muted mt-1">{t.org}</p>
+                  <span className="inline-block mt-3 chip">{t.note}</span>
+                </Reveal>
+              ))}
             </div>
-            
-            <div className="glass-card p-8">
-              <ul className="space-y-6">
-                {certifications.map((cert, idx) => (
-                  <motion.li 
-                    key={idx}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                    transition={{ duration: 0.4, delay: 0.2 + idx * 0.1 }}
-                    className="flex gap-4 group"
-                  >
-                    <div className="mt-1 text-text-muted group-hover:text-primary transition-colors shrink-0">
-                      <CheckCircle2 size={20} />
+          </div>
+
+          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {certs.map((c, i) => (
+              <Reveal key={c.title} delay={i} className={i === certs.length - 1 ? "sm:col-span-2" : ""}>
+                <div className="glass-card p-6 h-full group hover:border-primary/30">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 shrink-0 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-primary group-hover:bg-primary/10 transition-colors">
+                      <c.icon size={18} />
                     </div>
-                    <p className="text-text-muted group-hover:text-white transition-colors leading-relaxed text-sm md:text-base">
-                      {cert}
-                    </p>
-                  </motion.li>
-                ))}
-              </ul>
-            </div>
-          </motion.div>
-
+                    <div>
+                      <h5 className="font-display font-semibold text-white leading-snug">{c.title}</h5>
+                      <p className="text-sm text-text-muted mt-1 leading-relaxed">{c.text}</p>
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);

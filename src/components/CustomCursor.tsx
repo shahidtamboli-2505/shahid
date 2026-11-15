@@ -5,7 +5,12 @@ export const CustomCursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
 
+  const [isFinePointer] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(pointer: fine)").matches
+  );
+
   useEffect(() => {
+    if (!isFinePointer) return;
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -32,12 +37,14 @@ export const CustomCursor = () => {
       window.removeEventListener("mousemove", updateMousePosition);
       window.removeEventListener("mouseover", handleMouseOver);
     };
-  }, []);
+  }, [isFinePointer]);
+
+  if (!isFinePointer) return null;
 
   return (
     <>
       <motion.div
-        className="fixed top-0 left-0 w-3 h-3 bg-primary rounded-full pointer-events-none z-[9999] mix-blend-screen"
+        className="fixed top-0 left-0 w-3 h-3 bg-primary rounded-full pointer-events-none z-[9999] mix-blend-difference"
         animate={{
           x: mousePosition.x - 6,
           y: mousePosition.y - 6,
@@ -46,7 +53,7 @@ export const CustomCursor = () => {
         transition={{ type: "tween", ease: "backOut", duration: 0.1 }}
       />
       <motion.div
-        className="fixed top-0 left-0 w-10 h-10 border border-primary rounded-full pointer-events-none z-[9999] mix-blend-screen"
+        className="fixed top-0 left-0 w-10 h-10 border border-primary rounded-full pointer-events-none z-[9999] mix-blend-difference"
         animate={{
           x: mousePosition.x - 20,
           y: mousePosition.y - 20,

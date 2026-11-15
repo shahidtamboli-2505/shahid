@@ -1,182 +1,148 @@
 import { useRef, type MouseEvent } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ExternalLink, Briefcase } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowUpRight, Briefcase, Globe } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
+import { Reveal, SectionHeading } from "../Reveal";
+import { cn } from "../../utils/cn";
 
 interface Project {
   title: string;
   description: string;
-  repo: string;
+  repo?: string;
+  live?: string;
   type: string;
+  year: string;
   tech: string[];
   isInternship?: boolean;
+  featured?: boolean;
 }
 
 const projects: Project[] = [
   {
-    title: "Full-Stack & Agentic AI Intern — Pixel11 (Startup)",
-    description: "Built scalable web-scraping pipelines (Python, BeautifulSoup, Playwright, Stealth) to extract management-level contact data; integrated LLM APIs into automation workflows; designed REST APIs powering AI-driven business processes and built backend services for intelligent data retrieval.",
+    title: "Pixel11 — Full-Stack & Agentic AI Intern",
+    description: "Built scalable web-scraping pipelines (Python, BeautifulSoup, Playwright, Stealth) to extract management-level contact data; integrated LLM APIs into automation workflows; designed REST APIs powering AI-driven business processes and backend services for intelligent data retrieval.",
     repo: "https://github.com/shahidtamboli-2505/Shahid-Intern-project-1",
-    type: "Internship · Nov 2025 – Feb 2026",
-    tech: ["Python", "BeautifulSoup", "Playwright", "LLM APIs", "REST APIs", "Agentic AI", "Web Scraping"],
+    type: "Internship · Startup",
+    year: "Nov 2025 – Feb 2026",
+    tech: ["Python", "Playwright", "BeautifulSoup", "LLM APIs", "REST APIs", "Agentic AI"],
     isInternship: true,
+    featured: true,
   },
   {
-    title: "Guts — Enterprise AI Assistant (LLM + Agentic AI)",
-    description: "Built a modular voice/text assistant powered by a RAG pipeline and vector database, integrating weather, search, and time/date utilities via external APIs; architected for future LLM-based extensions.",
-    repo: "https://github.com/shahidtamboli-2505/Guts_Assistant",
-    type: "Voice/text-based intelligent assistant",
-    tech: ["Python", "Flask", "Streamlit", "FastAPI", "RAG", "Vector Database", "REST APIs"]
+    title: "AI Tutor Agent",
+    description: "Document-grounded tutoring agent: upload a PDF/TXT, auto-extract topics and a course title, ask questions answered from retrieved passages, and generate full, short, misconception-focused and prerequisite-bridge lessons. Modular backend with retrieval, pretests, progress tracking and Groq usage metrics.",
+    repo: "https://github.com/shahidtamboli-2505/AI_Tutor_Agent",
+    type: "LLM · RAG · Agentic AI",
+    year: "2026",
+    tech: ["Python", "Streamlit", "Groq API", "RAG", "Retrieval", "LLM"],
+    featured: true,
   },
   {
     title: "QR-Based Ordering & Billing System",
-    description: "Built and deployed a QR-based ordering and billing platform for a real paying client, with an admin dashboard for menu, orders, and payments; automated billing workflows cut order-processing time by 60%.",
+    description: "QR ordering and billing platform built and deployed for a paying restaurant client, with an admin dashboard for menu, orders and payments. Automated billing cut order-processing time by 60%.",
     repo: "https://github.com/shahidtamboli-2505/QR_billing-Invoice-System",
-    type: "Full-stack smart restaurant management platform",
-    tech: ["Python", "Flask", "React.js", "Vite", "REST APIs", "SQL"]
+    type: "Client project · Full-stack",
+    year: "2025",
+    tech: ["Python", "Flask", "React", "Vite", "REST APIs", "SQL"],
   },
   {
-    title: "Intelligent ATC Slot Allocation System (SkySlot AI)",
-    description: "Designed AI-based runway slot-scheduling algorithms that reduced simulated runway conflicts by 35%, with a dashboard for aircraft queue and runway-utilization monitoring.",
-    repo: "https://github.com/shahidtamboli-2505/ATC-Slot-Allocation-System",
-    type: "AI-based air traffic control optimization system",
-    tech: ["Python", "Machine Learning", "Streamlit", "Data Analysis"]
-  },
-  {
-    title: "Samruddhi Polyplastic — Company Website",
-    description: "Designed, built, and deployed a responsive, SEO-optimized company website for a plastics manufacturer, working directly with the client from requirements through production launch.",
+    title: "Samruddhi Polyplast — Company Website",
+    description: "Responsive, SEO-optimised website for a plastics manufacturer, delivered freelance from requirements to production launch and handed over to the client.",
     repo: "https://github.com/shahidtamboli-2505/SamruddhiPolyplostic",
-    type: "Role: Web Developer (Freelance)",
-    tech: ["React", "Next.js", "JavaScript", "HTML5", "CSS3", "Git", "GitHub", "Netlify"]
+    live: "https://samruddhipolyplast.com/",
+    type: "Client project · Freelance",
+    year: "2025",
+    tech: ["React", "Next.js", "JavaScript", "CSS3", "Netlify"],
   },
   {
-    title: "Aircraft Damage Detection & Health Monitoring System",
-    description: "Trained and evaluated a computer-vision classification model to detect aircraft body damage and abnormalities from component datasets, supporting predictive health monitoring.",
-    repo: "https://github.com/shahidtamboli-2505",
-    type: "Computer vision-based defect classification system",
-    tech: ["Python", "OpenCV", "PyTorch", "Machine Learning"]
-  }
+    title: "Guts — Enterprise AI Assistant",
+    description: "Modular voice/text assistant on a RAG pipeline and vector database, integrating weather, search and time/date utilities via external APIs; architected for LLM-based extensions.",
+    repo: "https://github.com/shahidtamboli-2505/Guts_Assistant",
+    type: "LLM · Agentic AI",
+    year: "2025",
+    tech: ["Python", "FastAPI", "Flask", "RAG", "Vector DB", "Streamlit"],
+  },
+  {
+    title: "SkySlot AI — ATC Slot Allocation",
+    description: "AI-based runway slot-scheduling algorithms that reduced runway conflicts by 35% in simulation, with a dashboard for aircraft queue and runway-utilisation monitoring.",
+    repo: "https://github.com/shahidtamboli-2505/ATC-Slot-Allocation-System",
+    type: "ML · Optimisation",
+    year: "2025",
+    tech: ["Python", "Machine Learning", "Streamlit", "Data Analysis"],
+  },
 ];
 
-const TiltCard = ({ project, index }: { project: Project, index: number }) => {
+const Card = ({ project, index }: { project: Project; index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
-  
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
 
-  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 40 });
-  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 40 });
-
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
-
-  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    
-    // Calculate normalized values from -0.5 to 0.5
-    const xPct = mouseX / width - 0.5;
-    const yPct = mouseY / height - 0.5;
-    
-    x.set(xPct);
-    y.set(yPct);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
+  const onMove = (e: MouseEvent<HTMLDivElement>) => {
+    const el = ref.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    el.style.setProperty("--my", `${e.clientY - r.top}px`);
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-10%" }}
-      transition={{ duration: 0.6, delay: (index % 3) * 0.1 }}
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        rotateX,
-        rotateY,
-        transformStyle: "preserve-3d",
-      }}
-      className="relative h-full"
-    >
-      <div 
-        className="glass-card h-full p-8 flex flex-col items-start rounded-2xl group transition-all duration-300 hover:border-primary/50 relative overflow-hidden" 
-        style={{ transform: "translateZ(30px)" }}
+    <Reveal delay={index % 2} className={cn("h-full", project.featured && "md:col-span-2")}>
+      <motion.div
+        ref={ref}
+        onMouseMove={onMove}
+        whileHover={{ y: -6 }}
+        transition={{ type: "spring", stiffness: 300, damping: 25 }}
+        className={cn("glass-card h-full p-7 md:p-9 flex flex-col group hover:border-primary/30", project.featured && "md:flex-row md:gap-10")}
       >
-        {/* Hover Glow */}
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_var(--mouse-x,50%)_var(--mouse-y,50%),rgba(56,189,248,0.1)_0%,transparent_100%)] pointer-events-none" />
-
-        {/* Internship Badge */}
-        {project.isInternship && (
-          <div className="absolute top-4 right-4 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-accent2/15 border border-accent2/40 text-accent2 text-xs font-semibold tracking-wide z-10">
-            <Briefcase size={11} />
-            Internship
+        <div className={cn("flex flex-col flex-1", project.featured && "md:w-3/5")}>
+          <div className="flex items-start justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-xs text-text-muted">0{index + 1}</span>
+              <span className="font-mono text-xs text-primary">{project.type}</span>
+            </div>
+            <span className="font-mono text-xs text-text-muted">{project.year}</span>
           </div>
-        )}
 
-        <div className="w-full flex items-start justify-between mb-4">
-          <div className="bg-background-light p-3 rounded-xl border border-white/10 group-hover:bg-primary/10 transition-colors">
-            {project.isInternship ? <Briefcase size={24} className="text-accent2" /> : <FaGithub size={24} className="text-primary" />}
+          <h4 className={cn("font-display font-bold text-white leading-tight mb-3 flex items-center gap-2", project.featured ? "text-2xl md:text-4xl" : "text-2xl")}>
+            {project.isInternship && <Briefcase size={20} className="text-accent1 shrink-0" />}
+            {project.title}
+          </h4>
+
+          <p className="text-text-muted leading-relaxed mb-6 flex-grow">{project.description}</p>
+
+          <div className="flex flex-wrap gap-2 mb-6">
+            {project.tech.map((t) => <span key={t} className="chip">{t}</span>)}
           </div>
-          <a
-            href={project.repo}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-text-muted hover:text-white transition-colors"
-          >
-            <ExternalLink size={20} />
-          </a>
         </div>
 
-        <h4 className="text-2xl font-display font-semibold text-white mb-2 leading-tight">
-          {project.title}
-        </h4>
-        
-        <p className="text-sm font-medium text-accent1 mb-6">
-          {project.type}
-        </p>
-
-        <p className="text-text-muted leading-relaxed mb-6 flex-grow">
-          {project.description}
-        </p>
-
-        <div className="flex flex-wrap gap-2 w-full mt-auto pt-6 border-t border-white/5">
-          {project.tech.map((t) => (
-            <span key={t} className="text-xs font-medium text-text px-2.5 py-1 bg-white/5 rounded-md border border-white/10">
-              {t}
-            </span>
-          ))}
+        <div className={cn("flex gap-3 mt-auto pt-6 border-t border-white/[0.06]", project.featured && "md:w-2/5 md:flex-col md:justify-end md:border-t-0 md:border-l md:pl-10 md:pt-0")}>
+          {project.live && (
+            <a href={project.live} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-primary text-background text-sm font-semibold hover:bg-primary-hover transition-colors shadow-glow magnetic-hover">
+              <Globe size={15} /> Live site <ArrowUpRight size={14} />
+            </a>
+          )}
+          {project.repo && (
+            <a href={project.repo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-white/10 text-sm font-medium text-white hover:border-primary hover:text-primary transition-colors magnetic-hover">
+              <FaGithub size={15} /> Code <ArrowUpRight size={14} />
+            </a>
+          )}
         </div>
-      </div>
-    </motion.div>
+      </motion.div>
+    </Reveal>
   );
 };
 
-export const ProjectsSection = () => {
-  const sectionRef = useRef(null);
-
-  return (
-    <section id="projects" className="py-24 relative" ref={sectionRef}>
-      <div className="container mx-auto px-6">
-        <div className="mb-16">
-          <h2 className="text-sm font-display font-bold tracking-widest text-primary uppercase mb-4">Portflio</h2>
-          <h3 className="text-4xl md:text-5xl font-display font-bold text-white">Featured Work</h3>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" style={{ perspective: "1000px" }}>
-          {projects.map((project, idx) => (
-            <TiltCard key={idx} project={project} index={idx} />
-          ))}
+export const ProjectsSection = () => (
+  <section id="projects" className="py-24 md:py-36 relative">
+    <div className="container mx-auto px-6">
+      <div className="max-w-6xl mx-auto">
+        <SectionHeading
+          label="Selected work"
+          title={<>Things I've <span className="text-gradient">built & shipped.</span></>}
+          sub="Internship work, client deliveries and AI projects — with code and live links where available."
+        />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {projects.map((p, i) => <Card key={p.title} project={p} index={i} />)}
         </div>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
