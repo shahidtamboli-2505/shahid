@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { CustomCursor } from "./components/CustomCursor";
-import { SmoothScroll } from "./components/SmoothScroll";
 import { Preloader } from "./components/Preloader";
 import { Background } from "./components/Background";
 import { Navbar } from "./components/Navbar";
@@ -17,7 +16,7 @@ function App() {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   return (
-    <SmoothScroll>
+    <>
       <Preloader />
       <CustomCursor />
       <Background />
@@ -39,7 +38,7 @@ function App() {
         isOpen={isResumeOpen} 
         onClose={() => setIsResumeOpen(false)} 
       />
-    </SmoothScroll>
+    </>
   );
 }
 
